@@ -4,10 +4,12 @@ import CommonModal from '../components/Modal/CommonModal';
 import { loginSuccess } from '../store/actions/authActions';
 import ResetPassword from './ResetPassword';
 import { useDispatch, useSelector } from 'react-redux';
+import SocialLoginButtons from '../components/Auth/SocialLoginButtons';
+import './AuthModal.css';
 
 const Login = ({ isOpen, onClose, openSignup }) => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,56 +21,80 @@ const Login = ({ isOpen, onClose, openSignup }) => {
       setPassword('');
     }
   }, [isLoggedIn]);
+
   const handleLogin = async () => {
     try {
       const response = await signInApi(email, password);
       const accessToken = response.headers.authorization?.replace('Bearer ', '');
 
-      dispatch(loginSuccess(
-        accessToken,
-        response.data
-      ))
+      dispatch(
+        loginSuccess(
+          accessToken,
+          response.data
+        )
+      );
+
       onClose();
     } catch (error) {
       alert(error.message);
-      // alert('이메일 또는 비밀번호가 올바르지 않습니다.');
     }
   };
 
   return (
     <>
       <CommonModal isOpen={isOpen} onClose={onClose}>
-        <h2>로그인</h2>
-        <input
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button onClick={handleLogin}>로그인</button>
+        <div className="auth-modal">
+          <h2 className="auth-title">로그인</h2>
 
-        <p 
-          style={{ cursor: 'pointer', color: 'blue' }}
-          onClick={() => setIsResetOpen(true)}
-        >
-          비밀번호를 잊으셨나요?
-        </p>
+          <div className="auth-form">
+            <input
+              className="auth-input"
+              type="email"
+              placeholder="이메일"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-        <p>
-          계정이 없으신가요?{' '}
-          <span
-            style={{ cursor: 'pointer', color: 'blue' }}
-            onClick={() => { onClose(); openSignup(); }}
-          >
-            회원가입
-          </span>
-        </p>
+            <input
+              className="auth-input"
+              type="password"
+              placeholder="비밀번호"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleLogin();
+              }}
+            />
+
+            <button className="auth-primary-button" onClick={handleLogin}>
+              로그인
+            </button>
+          </div>
+
+          <div className="auth-helper-row">
+            <span
+              className="auth-link"
+              onClick={() => setIsResetOpen(true)}
+            >
+              비밀번호를 잊으셨나요?
+            </span>
+          </div>
+
+          <SocialLoginButtons />
+
+          <p className="auth-footer-text">
+            계정이 없으신가요?{' '}
+            <span
+              className="auth-link"
+              onClick={() => {
+                onClose();
+                openSignup();
+              }}
+            >
+              회원가입
+            </span>
+          </p>
+        </div>
       </CommonModal>
 
       <ResetPassword
