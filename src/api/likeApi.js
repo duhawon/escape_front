@@ -13,12 +13,12 @@ export const getLikeUsersApi = (targetType, targetId, { page = 0, size = 10}) =>
 export const likeApi = (targetType, targetId) => {
     return api.post('/likes', {
         targetType, targetId
-    });
+    }, { requiresAuth: true });
 }
 
 export const unlikeApi = (targetType, targetId) => {
     console.log('targetTy[e : ', targetType, 'targetId : ' , targetId)
     return api.delete('/likes', {
         data : {targetType, targetId}
-    });
+    }, { requiresAuth: true });
 }

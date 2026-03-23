@@ -8,7 +8,7 @@ export const signInApi = (email, password) => {
 };
 
 export const signOutApi = () => {
-    return api.post('/auth/signOut');
+    return api.post('/auth/signOut', { requiresAuth: true });
 };
 
 export const reissueApi = () => {

@@ -1,15 +1,15 @@
 import api from './axiosInstance'
 
 export const followApi = (targetUserId) => {
-    return api.post(`/users/${targetUserId}/follows`);
+    return api.post(`/users/${targetUserId}/follows`, { requiresAuth: true });
 }
 
 export const unfollowApi = (targetUserId) => {
-    return api.delete(`/users/${targetUserId}/follows`);
+    return api.delete(`/users/${targetUserId}/follows`, { requiresAuth: true });
 }
 
 export const getFollowersApi = (userId) => {
-    return api.get(`/users/${userId}/follows/followers`);
+    return api.get(`/users/${userId}/follows/followers`,);
 }
 
 export const getFollowingsApi = (userId,{page = 0, size = 10}) => {

@@ -8,7 +8,8 @@ export const presignUserProfileApi = ({ contentType, originalFileName }) => {
 };
 
 export const updateMyProfileImageApi = (profileImgKey) => {
-  return api.put('/users/me/profile-img', {
-    profileImgKey,
-  });
+  return api.put('/users/me/profile-img',
+  { profileImgKey},
+  { requiresAuth: true }
+  );
 };

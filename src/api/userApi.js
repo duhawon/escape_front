@@ -5,5 +5,7 @@ export const signUpApi = (signUpData) => {
 }
 
 export const getMyProfileApi = () => {
-    return api.get('/users/profile/me');
+    return api.get('/users/profile/me', {
+        requiresAuth: true,
+      });
 }
