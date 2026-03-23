@@ -7,12 +7,14 @@ import ReviewDetail from './pages/ReviewDetail';
 import SearchResultPage from './pages/SearchResultPage';
 import Profile from './pages/Profile';
 import ProtectedRoute from './routes/ProtectedRoute';
+import OAuthCallback from './pages/OAuthCallback';
 
 function AppRouter() {
     return (
         <div>
             <Routes>
                 <Route path="/" element={<Main />} />
+                <Route path="/oauth/callback" element={<OAuthCallback />} />
                 <Route path="room/:roomId" element={<RoomDetail />} />
                 <Route path="room/:roomId/reviews" element={<ReviewList />} />
                 <Route path="review/:reviewId" element={<ReviewDetail />} />

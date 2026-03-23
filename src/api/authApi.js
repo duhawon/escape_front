@@ -14,3 +14,9 @@ export const signOutApi = () => {
 export const reissueApi = () => {
     return api.post('/auth/reissue');
 }
+
+export const exchangeOAuthCodeApi = (code) => {
+    return api.post('/auth/oauth/exchange', {
+        code,
+    });
+};
