@@ -5,7 +5,12 @@ const SocialLoginButtons = ({ showDivider = true }) => {
   const handleGoogleLogin = () => {
     window.location.href = `${API_BASE_URL}/oauth2/authorization/google`;
   };
-
+  const handleKakaoLogin = () => {
+    window.location.href = `${API_BASE_URL}/oauth2/authorization/kakao`;
+  }
+  const handleNaverLogin = () => {
+    window.location.href = `${API_BASE_URL}/oauth2/authorization/naver`;
+  }
   return (
     <>
       {showDivider && (
@@ -24,39 +29,23 @@ const SocialLoginButtons = ({ showDivider = true }) => {
           <span>Google로 계속하기</span>
         </button>
 
-        {/*
-          나중에 카카오 추가 시
-          window.location.href = `${API_BASE_URL}/oauth2/authorization/kakao`;
-        */}
-        {/*
         <button
           type="button"
           className="social-login-button kakao"
-          onClick={() => {
-            window.location.href = `${API_BASE_URL}/oauth2/authorization/kakao`;
-          }}
+          onClick={handleKakaoLogin}
         >
           <span className="social-login-icon">K</span>
           <span>Kakao로 계속하기</span>
         </button>
-        */}
 
-        {/*
-          나중에 네이버 추가 시
-          window.location.href = `${API_BASE_URL}/oauth2/authorization/naver`;
-        */}
-        {/*
         <button
           type="button"
           className="social-login-button naver"
-          onClick={() => {
-            window.location.href = `${API_BASE_URL}/oauth2/authorization/naver`;
-          }}
+          onClick={handleNaverLogin}
         >
           <span className="social-login-icon">N</span>
           <span>Naver로 계속하기</span>
         </button>
-        */}
       </div>
     </>
   );
