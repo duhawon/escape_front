@@ -108,7 +108,7 @@ const SearchResultPage = () => {
         {roomSlice.content.map((room) => (
           <div key={room.id} className="grid-item">
             <BannerCard
-              img={"/default-room.png"}
+              img={room.posterImgUrl}
               title={room.name}
               rating={room.rating}
               onClick={() => navigate(`/room/${room.id}`)}
